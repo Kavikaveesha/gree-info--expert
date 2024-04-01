@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "512734775360",
+    "project_id": "green-expert",
+    "storage_bucket": "green-expert.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512734775360:android:9816b02df8e455655f37a5",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Qq9f10-nZgChGzdE9CHRZnF58G4-9X8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
