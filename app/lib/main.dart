@@ -1,6 +1,4 @@
-import 'package:app/features/screen/admin/admin_homePage.dart';
-import 'package:app/test.dart';
-import 'package:app/test2.dart';
+import 'package:app/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,9 +18,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      home: AdminHomePage(),
-      theme: TAppTheme.lightTheme,
+    return SafeArea(
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: AuthPage(),
+        theme: TAppTheme.lightTheme,
+      ),
     );
   }
 }

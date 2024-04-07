@@ -52,3 +52,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/category/
+    - assets/logos/
+    - assets/noData/
+    - assets/profile_images/

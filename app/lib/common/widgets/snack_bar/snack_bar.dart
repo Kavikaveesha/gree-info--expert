@@ -8,12 +8,12 @@ class SnackbarHelper {
     required String title,
     required String message,
     Color? backgroundColor,
-    Color? textColor=Colors.white,
+    Color? textColor = Colors.white,
   }) {
     Get.snackbar(
       title,
       message,
-      backgroundColor: backgroundColor ?? TColors.appPrimaryColor,
+      backgroundColor: backgroundColor ?? Colors.green,
       colorText: textColor ?? Colors.white,
     );
   }

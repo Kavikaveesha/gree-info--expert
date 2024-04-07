@@ -42,7 +42,7 @@ class DataDisplayCard extends StatelessWidget {
                       labelText,
                       style: const TextStyle(
                           fontSize: 15,
-                          color: Colors.grey,
+                          color: Color.fromARGB(255, 213, 213, 213),
                           fontWeight: FontWeight.w700),
                     ),
                     GestureDetector(
@@ -51,7 +51,7 @@ class DataDisplayCard extends StatelessWidget {
                           edit ?? '',
                           style: TextStyle(
                               fontSize: 15,
-                              color: TColors.appPrimaryColor,
+                              color: Colors.green,
                               fontWeight: FontWeight.bold),
                         ))
                   ],
@@ -65,7 +65,7 @@ class DataDisplayCard extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .headlineSmall!
-                        .copyWith(color: const Color.fromARGB(255, 54, 54, 54)),
+                        .copyWith(color: Colors.white),
                   ),
                 ),
               ]),

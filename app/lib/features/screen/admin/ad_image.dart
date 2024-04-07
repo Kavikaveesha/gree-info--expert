@@ -1,4 +1,3 @@
-import 'package:app/features/screen/admin/controller/ad_fruitsplants_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,8 +17,7 @@ class _AddImagePageState extends State<AddImagePage> {
   late firebase_storage.Reference ref;
   late List<File> images = [];
   late CollectionReference imgRef;
-  final FruitPlantController fruitPlantController =
-      Get.put(FruitPlantController());
+ 
 
   @override
   Widget build(BuildContext context) {
