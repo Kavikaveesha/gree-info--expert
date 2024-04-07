@@ -4,23 +4,21 @@ import 'package:get/get.dart';
 import '../../../../utils/constants/mediaQuery.dart';
 
 class CommonDetailsPage extends StatelessWidget {
-  final String firstImg;
-  final String? secondImg;
-  final String? thirdImg;
+  final List<dynamic> images;
   final String plantTitle;
   final String mainDesc;
   final String? howDesc;
   final String? fetDesc;
+  final String? collectionName;
 
   const CommonDetailsPage(
       {super.key,
-      required this.firstImg,
-      this.secondImg,
-      this.thirdImg,
       required this.plantTitle,
       required this.mainDesc,
       this.howDesc,
-      this.fetDesc});
+      this.fetDesc,
+      required this.images,
+      this.collectionName});
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +46,18 @@ class CommonDetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               child: SizedBox(
-                width: double.infinity,
-                height: screenHeight * .3,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  children: [
-                    // Render images
-                    for (var img in [firstImg, secondImg, thirdImg])
-                      if (img != null) ...[
-                        SizedBox(width: screenWidth * 0.02),
-                        Container(
+                  width: double.infinity,
+                  height: screenHeight * .3,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: images
+                        .length, // Assuming dataList is the list containing image URLs
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                            left: index == 0 ? 0 : screenWidth * 0.02),
+                        child: Container(
                           margin: EdgeInsets.all(10),
                           width: screenWidth * 0.5,
                           height: screenHeight * 0.3,
@@ -68,8 +67,8 @@ class CommonDetailsPage extends StatelessWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: screenWidth * 0.01,
-                                blurRadius: screenWidth * 0.025,
+                                spreadRadius: screenWidth * 0.005,
+                                blurRadius: screenWidth * 0.01,
                                 offset: const Offset(0, .1),
                               ),
                             ],
@@ -78,15 +77,14 @@ class CommonDetailsPage extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.circular(screenWidth * 0.05),
                             child: Image.network(
-                              img!,
+                              images[index]['url'],
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                      ],
-                  ],
-                ),
-              ),
+                      );
+                    },
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -105,12 +103,12 @@ class CommonDetailsPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      'How to Grow',
+                      collectionName == 'fertilizers' ? '' : 'How to Grow',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                   Text(
-                    howDesc!,
+                    howDesc ?? 'No data available',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black87,
@@ -121,12 +119,12 @@ class CommonDetailsPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      'Fertilizers',
+                      collectionName == 'fertilizers' ? '' : 'Fertilizers',
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
                   Text(
-                    fetDesc!,
+                    fetDesc ?? 'No data available',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black87,

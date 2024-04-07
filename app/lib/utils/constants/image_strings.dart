@@ -12,6 +12,7 @@ class MyImages {
   static const String sprPlant = "assets/logos/sprout_plant.jpg";
   static const String plantlogo = "assets/logos/plantlogo.jpg";
   static const String greentips = "assets/logos/green_tips.png";
+  static const String appLogo = "assets/logos/appLogo.jpg";
   static const String loginImg = "assets/logos/loginImg.png";
   static const String noData = "assets/noData/noData.png";
   static const String user = "assets/profile_images/user.png";

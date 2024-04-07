@@ -106,7 +106,7 @@ class _ShowAllDetailsState extends State<ShowAllDetails> {
 
         return ItemContainer(
           title: data['title'],
-          firstImageUrl: data['images'][0]['url'],
+          firstImageUrl: data['images'][0]['url'] ?? '',
           deleteItem: () {
             deleteDocument(widget.collectionName, documentId);
           },

@@ -186,13 +186,12 @@ class _SearchPageState extends State<SearchPage> {
                             imagePath: firstImg,
                             onTapMore: () {
                               Get.to(() => ShowPlantAllDetails(
+                                    collectionName: collections.first,
                                     plantTitle: plantTitle,
-                                    firstImg: firstImg,
-                                    secondImg: secondImg,
-                                    thirdImg: thirdImg,
                                     mainDesc: mainDesc,
                                     howToDesc: howToDesc,
                                     fertiDesc: fertiDesc,
+                                    images: images,
                                   ));
                             },
                           );

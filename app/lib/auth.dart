@@ -35,13 +35,12 @@ class AuthPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Gree Expert',
-                style: Theme.of(context).textTheme.headlineSmall),
-            SizedBox(height: 20),
-            Image.asset(
-              MyImages.plantlogo,
-              height: 40,
-            ),
+            CircleAvatar(
+              backgroundImage: AssetImage(
+                MyImages.appLogo,
+              ),
+              radius: 40,
+            )
           ],
         ),
       ),

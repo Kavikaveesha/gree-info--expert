@@ -126,13 +126,13 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
                     imagePath: firstImg,
                     onTapMore: () {
                       Get.to(() => ShowPlantAllDetails(
-                          plantTitle: plantTitle,
-                          firstImg: firstImg,
-                          secondImg: secondImg,
-                          thirdImg: thirdImg,
-                          mainDesc: mainDesc,
-                          howToDesc: howToDesc,
-                          fertiDesc: fertiDesc));
+                            collectionName: widget.collectionName,
+                            plantTitle: plantTitle,
+                            mainDesc: mainDesc,
+                            howToDesc: howToDesc,
+                            fertiDesc: fertiDesc,
+                            images: images,
+                          ));
                     },
                   );
                 }
@@ -146,13 +146,13 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
                     imagePath: firstImg,
                     onTapMore: () {
                       Get.to(() => ShowPlantAllDetails(
-                          plantTitle: plantTitle,
-                          firstImg: firstImg,
-                          secondImg: secondImg,
-                          thirdImg: thirdImg,
-                          mainDesc: mainDesc,
-                          howToDesc: howToDesc,
-                          fertiDesc: fertiDesc));
+                            collectionName: widget.collectionName,
+                            plantTitle: plantTitle,
+                            mainDesc: mainDesc,
+                            howToDesc: howToDesc,
+                            fertiDesc: fertiDesc,
+                            images: images,
+                          ));
                     },
                   );
                 }
