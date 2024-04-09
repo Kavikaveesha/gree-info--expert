@@ -148,10 +148,7 @@ class _AllUsersForAdminState extends State<AllUsersForAdmin> {
         ),
       );
     }
-    if (data['fullName']
-        .toString()
-        .toLowerCase()
-        .startsWith(name.toLowerCase())) {
+    if (data['fullName'].toString().toLowerCase().startsWith(name)) {
       return Container(
         margin: EdgeInsets.all(15),
         width: MediaQueryUtils.getWidth(context) * .9,

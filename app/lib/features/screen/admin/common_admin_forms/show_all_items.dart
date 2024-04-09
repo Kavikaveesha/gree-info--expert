@@ -1,6 +1,7 @@
 import 'package:app/common/widgets/snack_bar/snack_bar.dart';
 import 'package:app/features/screen/admin/common_admin_forms/add_new.dart';
 import 'package:app/features/screen/admin/common_admin_forms/update_items.dart';
+import 'package:app/utils/constants/image_strings.dart';
 import 'package:app/utils/constants/mediaQuery.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,7 +107,10 @@ class _ShowAllDetailsState extends State<ShowAllDetails> {
 
         return ItemContainer(
           title: data['title'],
-          firstImageUrl: data['images'][0]['url'] ?? '',
+          firstImageUrl:
+              data['images'].isNotEmpty && data['images'][0]['url'] != null
+                  ? data['images'][0]['url'] ?? ''
+                  : '',
           deleteItem: () {
             deleteDocument(widget.collectionName, documentId);
           },
@@ -141,56 +145,58 @@ class ItemContainer extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 224, 224, 224),
-        ),
+            color: Color.fromARGB(255, 245, 244, 244),
+            border: Border.all(color: Colors.black45)),
         margin: EdgeInsets.only(bottom: 10),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.network(
-                width: MediaQueryUtils.getWidth(context) * .2,
-                firstImageUrl,
-                fit: BoxFit.cover,
-              ),
+              firstImageUrl.isNotEmpty
+                  ? Image.network(
+                      width: MediaQueryUtils.getWidth(context) * .2,
+                      height: MediaQueryUtils.getWidth(context) * .2,
+                      firstImageUrl,
+                      fit: BoxFit.cover,
+                    )
+                  : SizedBox(), // or display a placeholder image
+
               Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 10, left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Text(
-                        title.length > 10 ? title.replaceAll(' ', '\n') : title,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                        maxLines: 2, // Set maximum number of lines to 2
-                        overflow: TextOverflow
-                            .ellipsis, // Add ellipsis if text overflows
-                      ),
+                    Text(
+                      title.length > 20 ? title.replaceAll(' ', '\n') : title,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                            onPressed: updateItem,
-                            child: Text(
-                              'Update',
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 15),
-                            )),
+                          onPressed: updateItem,
+                          child: Text(
+                            'Update',
+                            style: TextStyle(color: Colors.green, fontSize: 15),
+                          ),
+                        ),
                         TextButton(
-                            onPressed: deleteItem,
-                            child: Text('Delete',
-                                style: TextStyle(
-                                    color: Colors.red, fontSize: 15))),
+                          onPressed: deleteItem,
+                          child: Text(
+                            'Delete',
+                            style: TextStyle(color: Colors.red, fontSize: 15),
+                          ),
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -6,6 +6,7 @@ class MyImages {
   static const String fruitplants = "assets/category/fruitplants.jpeg";
   static const String fertilizer = "assets/category/fetilizer.webp";
   static const String bedplants = "assets/category/bedplants.jpg";
+  static const String flowerPlants = "assets/category/flowerPlant.jpeg";
 
   static const String googleLogo = "assets/logos/google_logo.png";
   static const String plant = "assets/logos/plant.jpg";

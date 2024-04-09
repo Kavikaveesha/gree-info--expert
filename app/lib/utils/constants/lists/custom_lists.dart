@@ -14,7 +14,7 @@ class CustomLists {
     'mobileNumber',
     'address',
   ];
-   static List<CategoryCard> categories = [
+  static List<CategoryCard> categories = [
     CategoryCard(
         title: 'Fertilizers',
         imageUrl: MyImages.fertilizer,
@@ -35,12 +35,17 @@ class CustomLists {
         title: 'Bedding\nPlants',
         imageUrl: MyImages.bedplants,
         collectionName: 'bedding plants'),
+    CategoryCard(
+        title: 'Flower\nPlants',
+        imageUrl: MyImages.flowerPlants,
+        collectionName: 'flower plants'),
   ];
   static List<String> titles = [
     'Fertilizers', // Initial title
     'Vegitable Plants', // Add all titles here
     'Fruit Plants',
     'Indoor Plants',
-    'Bedding Plants'
+    'Bedding Plants',
+    'Flower Plants'
   ];
 }

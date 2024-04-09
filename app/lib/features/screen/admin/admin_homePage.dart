@@ -53,6 +53,13 @@ class AdminHomePage extends StatelessWidget {
           Get.to(() => ShowAllDetails(collectionName: 'bedding plants'));
         },
         collectionName: 'bedding plants'),
+    CategoryCard(
+        title: 'Flower\nPlants',
+        imageUrl: MyImages.flowerPlants,
+        onTap: () {
+          Get.to(() => ShowAllDetails(collectionName: 'flower plants'));
+        },
+        collectionName: 'flower plants'),
   ];
 
   @override
@@ -133,9 +140,7 @@ class AdminHomePage extends StatelessWidget {
                                                 .snapshots(),
                                             builder: (context, snapshot) {
                                               if (snapshot.connectionState ==
-                                                  ConnectionState.waiting) {
-                                                return CircularProgressIndicator();
-                                              }
+                                                  ConnectionState.waiting) {}
                                               if (snapshot.hasError) {
                                                 return Text(
                                                     'Error: ${snapshot.error}');

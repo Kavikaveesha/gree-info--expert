@@ -48,7 +48,7 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
                 });
               },
             ),
-            PlantBox(), // Corrected method name to follow Dart conventions
+            PlantBox(),
           ],
         ),
       ),
@@ -56,9 +56,8 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
   }
 
   Widget PlantBox() {
-    // Corrected method name to follow Dart conventions
     return SizedBox(
-      height: MediaQueryUtils.getHeight(context),
+      height: MediaQueryUtils.getHeight(context) * .75,
       child: FutureBuilder<QuerySnapshot>(
         future:
             FirebaseFirestore.instance.collection(widget.collectionName).get(),
@@ -74,7 +73,6 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
           } else {
             final List<DocumentSnapshot> documents = snapshot.data!.docs;
             if (documents.isEmpty) {
-              // If there are no documents available
               return Center(
                 child: Column(
                   children: [
@@ -87,75 +85,42 @@ class _ShowPlantsCommonState extends State<ShowPlantsCommon> {
                 ),
               );
             }
+            // Filter documents based on search query
+            final filteredDocuments = documents.where((document) {
+              final plantTitle = document['title'].toString().toLowerCase();
+              return title.isEmpty ||
+                  plantTitle.contains(title.toLowerCase()) ||
+                  plantTitle.startsWith(title.toLowerCase());
+            }).toList();
 
             return ListView.builder(
-              itemCount: documents.length,
+              itemCount: filteredDocuments.length,
               itemBuilder: (context, index) {
-                final document = documents[index];
-
+                final document = filteredDocuments[index];
                 final List<dynamic> images = document['images'];
-
-                String firstImg = '';
-                String secondImg = '';
-                String thirdImg = '';
-                String mainDesc1 = '';
-
-                if (images.length >= 1) {
-                  firstImg = images[0]['url'];
-                }
-
-                if (images.length >= 2) {
-                  secondImg = images[1]['url'];
-                }
-
-                if (images.length >= 3) {
-                  thirdImg = images[2]['url'];
-                }
+                final String firstImg =
+                    images.isNotEmpty ? images[0]['url'] : '';
                 final String plantTitle = document['title'];
-                String mainDesc = document['mainPara'];
-                String howToDesc = document['secondPara'];
-                String fertiDesc = document['thirdPara'];
-                if (mainDesc.length > 50) {
-                  mainDesc1 = mainDesc.substring(0, 100) + '...';
-                }
+                final String mainDesc = document['mainPara'];
+                final String mainDesc1 = mainDesc.length > 50
+                    ? mainDesc.substring(0, 100) + '...'
+                    : mainDesc;
 
-                if (title.isEmpty) {
-                  return ExpandableCard(
-                    title: plantTitle,
-                    description: mainDesc1,
-                    imagePath: firstImg,
-                    onTapMore: () {
-                      Get.to(() => ShowPlantAllDetails(
-                            collectionName: widget.collectionName,
-                            plantTitle: plantTitle,
-                            mainDesc: mainDesc,
-                            howToDesc: howToDesc,
-                            fertiDesc: fertiDesc,
-                            images: images,
-                          ));
-                    },
-                  );
-                }
-                if (document['title']
-                    .toString()
-                    .toLowerCase()
-                    .startsWith(title.toLowerCase())) {
-                  return ExpandableCard(
-                    title: plantTitle,
-                    description: mainDesc1,
-                    imagePath: firstImg,
-                    onTapMore: () {
-                      Get.to(() => ShowPlantAllDetails(
-                            collectionName: widget.collectionName,
-                            plantTitle: plantTitle,
-                            mainDesc: mainDesc,
-                            howToDesc: howToDesc,
-                            fertiDesc: fertiDesc,
-                            images: images,
-                          ));
-                    },
-                  );
-                }
+                return ExpandableCard(
+                  title: plantTitle,
+                  description: mainDesc1,
+                  imagePath: firstImg,
+                  onTapMore: () {
+                    Get.to(() => ShowPlantAllDetails(
+                          collectionName: widget.collectionName,
+                          plantTitle: plantTitle,
+                          mainDesc: mainDesc,
+                          howToDesc: document['secondPara'],
+                          fertiDesc: document['thirdPara'],
+                          images: images,
+                        ));
+                  },
+                );
               },
             );
           }
